@@ -3,11 +3,12 @@ using UnityEngine.UI;
 
 public class StateManager : MonoBehaviour
 {
+    private int playerId;
     public int state;
     public GameObject UIPanel;
     public GameObject ARPanel;
-    public GameObject MqttPanel;
     public GameObject EndgamePanel;
+    public GameObject PlayerControlButtons;
     public EvalServerData evalServerData;
     public Text messageToPublish;
     public mqttReceiver mqttReceiver;
@@ -16,6 +17,7 @@ public class StateManager : MonoBehaviour
 
     void Start()
     {
+        playerId = 0;
         state = 0;
         hasLoggedOut = false;
         mqttReceiver.isVisible = false;
@@ -49,16 +51,6 @@ public class StateManager : MonoBehaviour
             ARPanel.SetActive(false);
         }
 
-        if (state == 3)
-        {
-            MqttPanel.SetActive(true);
-        } else
-        {
-            MqttPanel.SetActive(false);
-        }
-
-        messageToPublish.text = "Opponent detected? " + m_isTracking;
-
         if (hasLoggedOut)
         {
             EndgamePanel.SetActive(true);
@@ -67,16 +59,37 @@ public class StateManager : MonoBehaviour
         {
             EndgamePanel.SetActive(false);
         }
+
+        if (playerId == 1)
+        {
+            playerIdInfo.text = "PLAYER 1";
+        } else if (playerId == 2)
+        {
+            playerIdInfo.text = "PLAYER 2";
+        }
     }
 
     public void UpdateState()
     {
         state++;
-        if (state > 3)
+        if (state > 2)
         {
             state = 0;
         }
         Debug.Log("State: " + state);
+    }
+
+    public void TogglePlayerControlState()
+    {
+        PlayerControlButtons.SetActive(!PlayerControlButtons.active);
+    }
+
+    /* Player ID setup */
+    public Text playerIdInfo;
+    public void SetPlayerId(int id)
+    {
+        playerId = id;
+        Debug.Log("Set player id to " + playerId);
     }
 
     /* Opponent tracker */
