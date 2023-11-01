@@ -92,7 +92,10 @@ public class Player : MonoBehaviour
     public void UpdateShieldHealth(int shieldHp)
     {
         currentShieldHealth = shieldHp;
-        shieldHealthBar.SetShieldHealth(shieldHp);
+        if (shieldHealthBar != null)
+        {
+            shieldHealthBar.SetShieldHealth(shieldHp);
+        }
     }
 
     public void TakeDamage()

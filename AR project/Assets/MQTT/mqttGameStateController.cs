@@ -14,7 +14,7 @@ public class mqttGameStateController : MonoBehaviour
 
     public Animator punchAnimator;
 
-    public mqttReceiver publisher;
+    //public mqttReceiver publisher;
 
     void Start()
     {
@@ -28,6 +28,7 @@ public class mqttGameStateController : MonoBehaviour
 
         MqttServerMsg jsonMsg = JsonUtility.FromJson<MqttServerMsg>(newMsg);
         int player_id = jsonMsg.player_id;
+        Debug.Log("Player ID is: " + player_id);
 
         int p1MsgStart = newMsg.IndexOf("\"p1\": {") + "\"p1\":{".Length;
         string p1Msg = newMsg.Substring(p1MsgStart).Substring(0, newMsg.Substring(p1MsgStart).IndexOf('}') + 1);
@@ -50,15 +51,17 @@ public class mqttGameStateController : MonoBehaviour
 
         if (string_action != "none" && string_action != "gun")
         {
-            publisher.Publish(string_action, player_id);
+            _eventSender.Publish(string_action, player_id);
         }
 
         if (stateManager.playerId == 1)
         {
+            Debug.Log("Update for Player 1");
             UpdateGameState(player1, p1JsonMsg, p2JsonMsg.deaths);
             UpdateGameState(player2, p2JsonMsg, p1JsonMsg.deaths);
         } else if (stateManager.playerId == 2)
         {
+            Debug.Log("Update for Player 2");
             UpdateGameState(player1, p2JsonMsg, p1JsonMsg.deaths);
             UpdateGameState(player2, p1JsonMsg, p2JsonMsg.deaths);
         } else
@@ -76,18 +79,23 @@ public class mqttGameStateController : MonoBehaviour
             case "0":
                 return "none";
             case "1":
+                return "none";
             case "2":
                 return "gun";
             case "3":
+                return "none";
             case "4":
+                return "none";
             case "5":
                 return "shield";
             case "6":
+                return "none";
             case "7":
                 return "grenade";
             case "8":
-            case "9":
                 return "reload";
+            case "9":
+                return "none";
             case "10":
                 return "web";
             case "11":
@@ -115,7 +123,7 @@ public class mqttGameStateController : MonoBehaviour
                 aRController.Shoot();
                 break;
 
-            case "4":
+            case "5":
                 stateManager.ActivatePlayerShield();
                 break;
 

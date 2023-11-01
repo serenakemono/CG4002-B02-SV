@@ -913,7 +913,6 @@ MonoBehaviour:
   aRController: {fileID: 399017634}
   reloadAnimator: {fileID: 1635693279}
   punchAnimator: {fileID: 1533529676}
-  publisher: {fileID: 893077833}
 --- !u!4 &469787219
 Transform:
   m_ObjectHideFlags: 0
@@ -1224,12 +1223,10 @@ MonoBehaviour:
   autoConnect: 1
   mqttUserName: 
   mqttPassword: 
-  topicSubscribe: 
-  topicPublish: 
+  topicSubscribe: nus/cg4002-2023/vis/send/player2
+  topicPublish: nus/cg4002-2023/vis/receive/player2
   messagePublish: 
-  mqttInfo: {fileID: 0}
   autoTest: 0
-  senderText: {fileID: 0}
   isVisible: 0
 --- !u!4 &893077834
 Transform:
@@ -3233,9 +3230,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1712146274}
     - target: {fileID: 2099205936814095943, guid: f73e304967aa3402cb5c4b9d71497682, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099205936814095943, guid: f73e304967aa3402cb5c4b9d71497682, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099205936814095943, guid: f73e304967aa3402cb5c4b9d71497682, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1712146274}
+    - target: {fileID: 2099205936814095943, guid: f73e304967aa3402cb5c4b9d71497682, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 893077832}
+    - target: {fileID: 2099205936814095943, guid: f73e304967aa3402cb5c4b9d71497682, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099205936814095943, guid: f73e304967aa3402cb5c4b9d71497682, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: StateManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2154510218469737599, guid: f73e304967aa3402cb5c4b9d71497682, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
