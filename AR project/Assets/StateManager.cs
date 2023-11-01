@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class StateManager : MonoBehaviour
 {
-    private int playerId;
+    public int playerId;
     public int state;
     public GameObject UIPanel;
     public GameObject ARPanel;
@@ -63,9 +63,13 @@ public class StateManager : MonoBehaviour
         if (playerId == 1)
         {
             playerIdInfo.text = "PLAYER 1";
+            mqttReceiver.topicPublish = "nus/cg4002-2023/vis/receive/player1";
+            mqttReceiver.topicSubscribe = "nus/cg4002-2023/vis/send/player1";
         } else if (playerId == 2)
         {
             playerIdInfo.text = "PLAYER 2";
+            mqttReceiver.topicPublish = "nus/cg4002-2023/vis/receive/player2";
+            mqttReceiver.topicSubscribe = "nus/cg4002-2023/vis/send/player2";
         }
     }
 

@@ -27,7 +27,6 @@ public class mqttGameStateController : MonoBehaviour
         Debug.Log("mqttGameStateController: The message from Object " + nameController + " is = " + newMsg);
 
         MqttServerMsg jsonMsg = JsonUtility.FromJson<MqttServerMsg>(newMsg);
-        Debug.Log("mqttGameStateController: The converted json message is " + jsonMsg.ToString());
         int player_id = jsonMsg.player_id;
 
         int p1MsgStart = newMsg.IndexOf("\"p1\": {") + "\"p1\":{".Length;
@@ -42,7 +41,10 @@ public class mqttGameStateController : MonoBehaviour
 
         jsonMsg.game_state = new MqttServerGameStateMsg(p1JsonMsg, p2JsonMsg);
 
-        ShowAREffect(jsonMsg.recognised_action);
+        if (player_id == stateManager.playerId)
+        {
+            ShowAREffect(jsonMsg.recognised_action);
+        }
 
         string string_action = ConvertEnumActionToNumAction(jsonMsg.recognised_action);
 
@@ -51,8 +53,19 @@ public class mqttGameStateController : MonoBehaviour
             publisher.Publish(string_action, player_id);
         }
 
-        UpdateGameState(player1, p1JsonMsg, p2JsonMsg.deaths);
-        UpdateGameState(player2, p2JsonMsg, p1JsonMsg.deaths);
+        if (stateManager.playerId == 1)
+        {
+            UpdateGameState(player1, p1JsonMsg, p2JsonMsg.deaths);
+            UpdateGameState(player2, p2JsonMsg, p1JsonMsg.deaths);
+        } else if (stateManager.playerId == 2)
+        {
+            UpdateGameState(player1, p2JsonMsg, p1JsonMsg.deaths);
+            UpdateGameState(player2, p1JsonMsg, p2JsonMsg.deaths);
+        } else
+        {
+            Debug.Log("Player ID not set!");
+        }
+        
 
     }
 

@@ -38,15 +38,12 @@ public class mqttReceiver : M2MqttUnityClient
     [Tooltip("Set the topic to publish (optional)")]
     public string topicPublish = ""; // topic to publish
     public string messagePublish = ""; // message to publish
-    public Text mqttInfo;
 
     [Tooltip("Set this to true to perform a testing cycle automatically on startup")]
     public bool autoTest = false;
 
     [Header("Tracking status")]
     [Tooltip("Get the message to be sent")]
-    public Text senderText;
-
     public bool isVisible;
 
     //using C# Property GET/SET and event listener to reduce Update overhead in the controlled objects
@@ -219,20 +216,5 @@ public class mqttReceiver : M2MqttUnityClient
         {
             autoConnect = true;
         }
-    }
-
-    public void ConnectToPlayer(int player)
-    {
-        if (player == 1)
-        {
-            topicSubscribe = "nus/cg4002-2023/vis/send/player0001";
-            topicPublish = "nus/cg4002-2023/vis/receive/player0001";
-        }
-        else
-        {
-            topicSubscribe = "nus/cg4002-2023/vis/send/player0002";
-            topicPublish = "nus/cg4002-2023/vis/receive/player0002";
-        }
-        mqttInfo.text = "subscribe to: " + topicSubscribe + "; publish to: " + topicPublish;
     }
 }
