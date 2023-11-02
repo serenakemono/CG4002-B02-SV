@@ -87,13 +87,13 @@ public class mqttGameStateController : MonoBehaviour
             case "4":
                 return "none";
             case "5":
-                return "shield";
+                return "none";
             case "6":
                 return "none";
             case "7":
                 return "grenade";
             case "8":
-                return "reload";
+                return "none";
             case "9":
                 return "none";
             case "10":
@@ -107,7 +107,7 @@ public class mqttGameStateController : MonoBehaviour
             case "14":
                 return "spear";
             case "15":
-                return "logout";
+                return "none";
             default:
                 return "invalid action";
         }
