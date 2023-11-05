@@ -8,4 +8,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Capstone.unity
     guid: b2fc8120d94c04738af5621f26a7e16e
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 0ca73d66cfdd7431891a06a45475fbbf, type: 2}

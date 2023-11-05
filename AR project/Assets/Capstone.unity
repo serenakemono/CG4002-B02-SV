@@ -1223,8 +1223,8 @@ MonoBehaviour:
   autoConnect: 1
   mqttUserName: 
   mqttPassword: 
-  topicSubscribe: nus/cg4002-2023/vis/send/player2
-  topicPublish: nus/cg4002-2023/vis/receive/player2
+  topicSubscribe: nus/cg4002-2023/vis/send/player1
+  topicPublish: nus/cg4002-2023/vis/receive/player1
   messagePublish: 
   autoTest: 0
   isVisible: 0
