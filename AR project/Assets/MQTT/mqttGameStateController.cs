@@ -118,19 +118,38 @@ public class mqttGameStateController : MonoBehaviour
         Debug.Log("Action is " + action);
         switch (action)
         {
+            case "1":
+                stateManager.DisplayActionMissedInfo(1);
+                break;
 
             case "2":
                 aRController.Shoot();
+                break;
+
+            case "3":
+                stateManager.DisplayActionMissedInfo(3);
+                break;
+
+            case "4":
+                stateManager.DisplayActionMissedInfo(4);
                 break;
 
             case "5":
                 stateManager.ActivatePlayerShield();
                 break;
 
+            case "6":
+                stateManager.DisplayActionMissedInfo(6);
+                break;
+
             case "7":
                 if (stateManager.isTracking)
                 {
                     aRController.ThrowGrenade();
+                }
+                else
+                {
+                    stateManager.DisplayActionMissedInfo(7);
                 }
                 break;
 
@@ -139,10 +158,18 @@ public class mqttGameStateController : MonoBehaviour
                 reloadAnimator.SetTrigger("Reload");
                 break;
 
+            case "9":
+                stateManager.DisplayActionMissedInfo(9);
+                break;
+
             case "10":
                 if (stateManager.isTracking)
                 {
                     aRController.ThrowWeb();
+                }
+                else
+                {
+                    stateManager.DisplayActionMissedInfo(10);
                 }
                 break;
 
@@ -150,6 +177,10 @@ public class mqttGameStateController : MonoBehaviour
                 if (stateManager.isTracking)
                 {
                     aRController.StartMagicCircle();
+                }
+                else
+                {
+                    stateManager.DisplayActionMissedInfo(11);
                 }
                 break;
 
@@ -159,12 +190,20 @@ public class mqttGameStateController : MonoBehaviour
                     aRController.Punch();
                     punchAnimator.SetTrigger("Punch");
                 }
+                else
+                {
+                    stateManager.DisplayActionMissedInfo(12);
+                }
                 break;
 
             case "13":
                 if (stateManager.isTracking)
                 {
                     aRController.ThrowHammer();
+                }
+                else
+                {
+                    stateManager.DisplayActionMissedInfo(13);
                 }
                 break;
 
@@ -173,10 +212,15 @@ public class mqttGameStateController : MonoBehaviour
                 {
                     aRController.ThrowSpear();
                 }
+                else
+                {
+                    stateManager.DisplayActionMissedInfo(14);
+                }
                 break;
 
             case "15":
-                stateManager.hasLoggedOut = true;
+                //stateManager.hasLoggedOut = true;
+                stateManager.DisplayActionMissedInfo(15);
                 Debug.Log("A logout action is received!");
                 break;
 

@@ -8,7 +8,13 @@ public class StateManager : MonoBehaviour
     public GameObject UIPanel;
     public GameObject ARPanel;
     public GameObject EndgamePanel;
+    public GameObject InfoControlPanel;
     public GameObject PlayerControlButtons;
+
+    public GameObject InfoPanel;
+    private float InfoPanelDelay;
+    public TMPro.TMP_Text MissedActionInfoText;
+
     public EvalServerData evalServerData;
     public Text messageToPublish;
     public mqttReceiver mqttReceiver;
@@ -19,6 +25,7 @@ public class StateManager : MonoBehaviour
     {
         playerId = 0;
         state = 0;
+        InfoPanelDelay = 0f;
         hasLoggedOut = false;
         mqttReceiver.isVisible = false;
     }
@@ -38,9 +45,11 @@ public class StateManager : MonoBehaviour
         if (state == 1)
         {
             UIPanel.SetActive(true);
+            InfoControlPanel.SetActive(true);
         } else
         {
             UIPanel.SetActive(false);
+            InfoControlPanel.SetActive(false);
         }
 
         if (state == 2)
@@ -66,6 +75,15 @@ public class StateManager : MonoBehaviour
         } else if (playerId == 2)
         {
             playerIdInfo.text = "PLAYER 2";
+        }
+
+        if (InfoPanelDelay > 0)
+        {
+            InfoPanel.SetActive(true);
+            InfoPanelDelay--;
+        } else
+        {
+            InfoPanel.SetActive(false);
         }
     }
 
@@ -222,5 +240,53 @@ public class StateManager : MonoBehaviour
         evalServerData.opponent.num_bullets = 6;
         evalServerData.opponent.num_grenades = 2;
         evalServerData.opponent.num_deaths = 0;
+    }
+
+    public void DisplayActionMissedInfo(int action)
+    {
+        switch (action)
+        {
+            case 1:
+                MissedActionInfoText.SetText("No more bullets.");
+                break;
+            case 3:
+                MissedActionInfoText.SetText("No more shields.");
+                break;
+            case 4:
+                MissedActionInfoText.SetText("Shield has been activated.");
+                break;
+            case 6:
+                MissedActionInfoText.SetText("No more grenades.");
+                break;
+            case 7:
+                MissedActionInfoText.SetText("You threw a grenade\nbut missed ://");
+                break;
+            case 9:
+                MissedActionInfoText.SetText("Cannot reload.\nThere are still bullets.");
+                break;
+            case 10:
+                MissedActionInfoText.SetText("You threw a web\nbut missed ://");
+                break;
+            case 11:
+                MissedActionInfoText.SetText("You activated a portal\nbut missed ://");
+                break;
+            case 12:
+                MissedActionInfoText.SetText("You punched\nbut missed ://");
+                break;
+            case 13:
+                MissedActionInfoText.SetText("You threw a hammer\nbut missed ://");
+                break;
+            case 14:
+                MissedActionInfoText.SetText("You threw a spear\nbut missed ://");
+                break;
+            case 15:
+                MissedActionInfoText.SetText("End of game!! Woohoooo uwu");
+                break;
+            default:
+                MissedActionInfoText.SetText("Oops...");
+                break;
+        }
+        //MissedActionInfoText.SetText("Oops");
+        InfoPanelDelay = 60f;
     }
 }
