@@ -23,7 +23,7 @@ public class StateManager : MonoBehaviour
 
     void Start()
     {
-        playerId = 0;
+        playerId = 1;
         state = 0;
         InfoPanelDelay = 0f;
         hasLoggedOut = false;
